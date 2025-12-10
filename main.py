@@ -1,6 +1,9 @@
 import pandas as pd
 from common.data_connector.temperature_connector import TemperatureConnector
 from skopt import gp_minimize
+from common.utils.debug import Debugger
+
+debug = Debugger()
 
 def cost(threshold, df):
     """
@@ -27,16 +30,16 @@ def main():
 
 
     # Erste Zeilen anzeigen
-    print("Erste Werte der letzten 7 Tage:")
-    print(df.head())
+    debug.log("Erste Werte der letzten 7 Tage:", label="Analysis App")
+    debug.log(df.head(), label="Analysis App")
 
     # Statistik über die Werte
-    print("\nStatistische Übersicht:")
-    print(df.describe())
+    debug.log("\nStatistische Übersicht:", label="Analysis App")
+    debug.log(df.describe(), label="Analysis App")
 
     res = gp_minimize(lambda x: cost(x[0], df), [(10, 30)], n_calls=30)
 
-    print("\nOptimierter Schwellwert:", res.x[0])
+    debug.log(f"\nOptimierter Schwellwert:{res.x[0]}", label="Analysis App")
 
 
 if __name__ == "__main__":

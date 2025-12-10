@@ -4,4 +4,4 @@
 source venv/bin/activate
 
 # Starte das Python-Programm
-python main.py
+python app.py
