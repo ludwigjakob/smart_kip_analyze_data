@@ -11,7 +11,7 @@ last_run = None
 def run_analysis():
     global last_run
     subprocess.run(["python", "main.py"])
-    last_run = datetime.datetime.utcnow()
+    last_run = datetime.datetime.now(datetime.UTC)
 
 @app.route("/run", methods=["POST"])
 def run_manual():

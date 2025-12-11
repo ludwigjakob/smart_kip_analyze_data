@@ -5,3 +5,4 @@ python-dotenv
 scikit-optimize
 flask
 apscheduler
+mysql-connector-python

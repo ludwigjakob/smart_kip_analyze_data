@@ -2,8 +2,10 @@ import pandas as pd
 from common.data_connector.temperature_connector import TemperatureConnector
 from skopt import gp_minimize
 from common.utils.debug import Debugger
+from common.data_connector.connector_manager import ConnectorManager
 
 debug = Debugger()
+connector_manager = ConnectorManager()
 
 def cost(threshold, df):
     """
@@ -38,6 +40,9 @@ def main():
     debug.log(df.describe(), label="Analysis App")
 
     res = gp_minimize(lambda x: cost(x[0], df), [(10, 30)], n_calls=30)
+    threshold_value = int(res.x[0])
+
+    connector_manager.set("threshold", {"100": threshold_value})
 
     debug.log(f"\nOptimierter Schwellwert:{res.x[0]}", label="Analysis App")
 
