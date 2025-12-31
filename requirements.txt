@@ -1,7 +1,6 @@
 numpy
 pandas
 influxdb_client
-python-dotenv
 scikit-optimize
 flask
 apscheduler
